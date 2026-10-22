@@ -1,0 +1,52 @@
+
+@model List<ClinicaVida.Web.Models.Medico>
+
+@{
+    ViewData["Title"] = "Médicos";
+}
+
+<h1>Médicos</h1>
+
+<form method="get" asp-action="Index">
+    <label for="especialidadeId">Filtrar por especialidade:</label>
+
+    <select id="especialidadeId" name="especialidadeId">
+        <option value="">Todas as especialidades</option>
+
+        @foreach (var especialidade in (List<ClinicaVida.Web.Models.Especialidade>)ViewBag.Especialidades)
+        {
+            <option value="@especialidade.Id"
+                    selected="@(ViewBag.EspecialidadeSelecionada == especialidade.Id)">
+                @especialidade.Nome
+            </option>
+        }
+    </select>
+
+    <button type="submit">Filtrar</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CRM</th>
+            <th>Especialidade</th>
+            <th>Detalhes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var medico in Model)
+        {
+            <tr>
+                <td>@medico.Nome</td>
+                <td>@medico.Crm</td>
+                <td>@medico.Especialidade?.Nome</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@medico.Id">
+                        Ver detalhes
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

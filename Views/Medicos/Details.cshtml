@@ -1,0 +1,28 @@
+
+@model ClinicaVida.Web.Models.Medico
+
+@{
+    ViewData["Title"] = "Detalhes do Médico";
+}
+
+<h1>Detalhes do Médico</h1>
+
+<div>
+    <h2>@Model.Nome</h2>
+
+    <dl>
+        <dt>Identificação (ID)</dt>
+        <dd>@Model.Id</dd>
+
+        <dt>CRM</dt>
+        <dd>@Model.Crm</dd>
+
+        <dt>Especialidade</dt>
+        <dd>@Model.Especialidade?.Nome</dd>
+
+        <dt>Descrição da especialidade</dt>
+        <dd>@Model.Especialidade?.Descricao</dd>
+    </dl>
+</div>
+
+<a asp-action="Index">Voltar para a lista de médicos</a>
